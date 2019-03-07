@@ -4,10 +4,10 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mping
 
-blue_tri = cv2.imread('images/ho_blue_tri.png')[:,:,::-1]
-blue_sq = cv2.imread('images/blue_sq.png')[:,:,::-1]
-red_sq = cv2.imread('images/red_sq.png')[:,:,::-1]
-red_tri = cv2.imread('images/ho_red_tri.png')[:,:,::-1]
+blue_tri = cv2.imread('blue_tri.png')[:,:,::-1]
+blue_sqr = cv2.imread('blue_sqr.png')[:,:,::-1]
+red_sqr = cv2.imread('red_sqr.png')[:,:,::-1]
+red_tri = cv2.imread('red_tri.png')[:,:,::-1]
 
 def trans(a):
     return .299*a[:,:,0] + .402*a[:,:,1] + .299*a[:,:,2]
@@ -89,7 +89,7 @@ def detect(image):
         print('empty')
         return flag,[]
 
-ml = red_tri
+ml = red_sqr
 
 
 
