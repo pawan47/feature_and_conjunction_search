@@ -9,29 +9,29 @@ from detect import detect
 from detect_col import detect_col
 import random
 
-from q2_functions import *
+from q2_functions import *   # contains fucntions for Q2
 
 
 
-def q2_para(type_=0,rand_point = 90): #0 = feature
+def q2_para(type_=0,rand_point = 90): #0 = feature search 1 = conjucture search
     
     if type_ == 0:
         plt.title('Feature Search')
-        M_feature, req_points,in_col = genFeature(rand_point, 72,True,False)
+        M_feature, req_points,in_col = genFeature(rand_point, 72,True,False)   # make a image for feature search
         print('ppp')
         if in_col == False:
-            shape_map_f(M_feature, req_points)
+            shape_map_f(M_feature, req_points) # if it is a shape featrue search 
         else:
-            color_map_f(M_feature, req_points)
+            color_map_f(M_feature, req_points) # if it is a color feature search
         plt.imshow(M_feature)
         plt.legend()
         plt.show()
     else:
         plt.title('Conjunction Search')
-        shape_odd_ = 0 #square
-        color_odd_ = 0 #redwww
-        Mm,req_points = conjucmake(rand_point, shape_odd = shape_odd_, color_odd = color_odd_)
-        runconj(Mm,req_points)
+        shape_odd_ = 0 #square    # choose shapefor odd feature, 0 == square,1 == triangle 
+        color_odd_ = 0 #redwww    # choose color for odd feature, 0 == red, 1 == Blue
+        Mm,req_points = conjucmake(rand_point, shape_odd = shape_odd_, color_odd = color_odd_)  # making image for the conjunction search
+        runconj(Mm,req_points)   # running conjuction search
         plt.imshow(Mm)
         plt.show()
         

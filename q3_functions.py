@@ -11,12 +11,12 @@ from detect_col import detect_col
 import random
 import time
 
-
+# generate base image 
 def genMat(size):
 	
 	return np.array([[[255]*3]*size*10]*size*10)
 
-
+#generate random points for experiments
 def getPoints(random_nums, size):
 	points = []
 	x = 0
@@ -31,7 +31,7 @@ def getPoints(random_nums, size):
 	return points
 
 
-
+# shape map for feature search
 
 def shape_map_f(M, req_points):
 	
@@ -42,7 +42,7 @@ def shape_map_f(M, req_points):
 			#print('detected triangle at point', i)
 			break
 
-
+# color map for feature search
 def color_map_f(M, req_points):
 	for i in req_points:
 		
@@ -53,6 +53,7 @@ def color_map_f(M, req_points):
 
 
 
+# generate image containg different shape of color for feature search
 
 def genFeature(random_nums, size=72,in_shape = True,in_col = False):
 	req_points = []
@@ -103,7 +104,7 @@ def genFeature(random_nums, size=72,in_shape = True,in_col = False):
 	
 	return M, req_points,in_col
 
-
+# imaages
 
 red_tri = cv2.resize(cv2.cvtColor(cv2.imread('red_tri.png'), cv2.COLOR_BGR2RGB), (72, 72))
 blue_tri = cv2.resize(cv2.cvtColor(cv2.imread('blue_tri.png'), cv2.COLOR_BGR2RGB), (72, 72))
@@ -111,6 +112,7 @@ red_sqr = cv2.resize(cv2.cvtColor(cv2.imread('red_sqr.png'), cv2.COLOR_BGR2RGB),
 blue_sqr = cv2.resize(cv2.cvtColor(cv2.imread('blue_sqr.png'), cv2.COLOR_BGR2RGB), (72, 72))
 
 
+# making shape of different color for conjucture search 
 
 def make_shape(shape_odd,color_odd):
 	if shape_odd == 0:
@@ -125,8 +127,8 @@ def make_shape(shape_odd,color_odd):
 			return blue_tri
 
 
-# In[16]:
 
+# shape map for conjucture search 
 
 def shape_map(M, req_points):
 	flags = []
@@ -141,7 +143,7 @@ def shape_map(M, req_points):
 	return flags
 
 
-
+# color map for conjucture map
 
 def color_map(M, req_points):
 	flags =[]
@@ -155,7 +157,7 @@ def color_map(M, req_points):
 			flags.append(1)
 	return flags
 
-
+# making image for conjucture search
 
 def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0 == square,
 	
@@ -214,16 +216,16 @@ def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0
 
 
 def runconj(M,req_points_,shape_odd = 0,color_odd = 0):
-	random.shuffle(req_points_ )
-	shape_flag = shape_map(M,req_points_)
-	color_flag = color_map(M,req_points_)
+	random.shuffle(req_points_ )             # points where to look for conjucture search
+	shape_flag = shape_map(M,req_points_)    # making shape map for the image
+	color_flag = color_map(M,req_points_)    # making color map for the image
 	
 	
 	for i in range(len(shape_flag)):
 		time.sleep(0.035)
 
 		if shape_flag[i] == shape_odd:
-			if color_flag[i] ==color_odd:
+			if color_flag[i] ==color_odd:   # searching for the odd feature like search for red sqaure or blue triangle
 
 				break
 	

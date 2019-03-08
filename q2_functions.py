@@ -10,12 +10,13 @@ from detect import detect
 from detect_col import detect_col
 import random
 
-
+# generate base image
 
 def genMat(size):
     
     return np.array([[[255]*3]*size*10]*size*10)
 
+#generate random points for experiments
 
 def getPoints(random_nums, size):
     points = []
@@ -31,8 +32,7 @@ def getPoints(random_nums, size):
     return points
 
 
-# In[9]:
-
+# shape map for feature search
 
 def shape_map_f(M, req_points):
     
@@ -58,8 +58,8 @@ def shape_map_f(M, req_points):
     # plt.savefig('fig5.jpg')
 
 
-# In[10]:
 
+# color map for feature search
 
 def color_map_f(M, req_points):
     for i in req_points:
@@ -72,8 +72,8 @@ def color_map_f(M, req_points):
             print('blue color detected at frame',i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
 
 
-# In[11]:
 
+# generate image containg different shape of color for feature search
 
 def genFeature(random_nums, size=72,in_shape = True,in_col = False):
     req_points = []
@@ -136,8 +136,8 @@ red_sqr = cv2.resize(cv2.cvtColor(cv2.imread('red_sqr.png'), cv2.COLOR_BGR2RGB),
 blue_sqr = cv2.resize(cv2.cvtColor(cv2.imread('blue_sqr.png'), cv2.COLOR_BGR2RGB), (72, 72))
 
 
-# In[15]:
 
+# making shape of different color for conjucture search 
 
 def make_shape(shape_odd,color_odd):
     if shape_odd == 0:
@@ -152,8 +152,7 @@ def make_shape(shape_odd,color_odd):
             return blue_tri
 
 
-# In[16]:
-
+# shape map for conjucture search 
 
 def shape_map(M, req_points):
     flags = []
@@ -168,8 +167,7 @@ def shape_map(M, req_points):
     return flags
 
 
-# In[17]:
-
+# color map for conjucture map
 
 def color_map(M, req_points):
     flags =[]
@@ -184,8 +182,7 @@ def color_map(M, req_points):
     return flags
 
 
-# In[29]:
-
+# making image for conjucture search
 
 def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0 == square,
     
@@ -251,8 +248,8 @@ def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0
 
 def runconj(M,req_points_):
     
-    shape_flag = shape_map(M,req_points_)
-    color_flag = color_map(M,req_points_)
+    shape_flag = shape_map(M,req_points_) # making shape map for the image
+    color_flag = color_map(M,req_points_) # making color map for the image
     dete = []
     
     for i in range(len(shape_flag)):

@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mping
 import random 
 
+
+# loading images
 blue_tri = cv2.imread('blue_tri.png')[:,:,::-1]
 blue_sqr = cv2.imread('blue_sqr.png')[:,:,::-1]
 red_sqr = cv2.imread('red_sqr.png')[:,:,::-1]
@@ -15,6 +17,7 @@ def trans(a):
 
     return .299*a[:,:,0] + .402*a[:,:,1] + .299*a[:,:,2]
 
+# generates base image for shapes
 def give_non_zero(mat):
     co = []
     for i in range(72):
@@ -23,7 +26,7 @@ def give_non_zero(mat):
                 co.append([i,j])
 
     return co
-
+#checks if list of list is empty or not for triangular case
 def isListEmpty(inList):
     ll = np.array(inList)
     if len(ll[0]) ==0:
@@ -109,9 +112,13 @@ def detect(image):
 
         return flag,[]
 
+# background image
 back = np.array([[[255]*3]*72]*72)
 
 chec = [blue_sqr,blue_tri,red_sqr,red_tri,back] #back stands for background image
+
+
+# running for some images which contains square, traingle and  background
 random.shuffle(chec)
 for i in range(5):
 

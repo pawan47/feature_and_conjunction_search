@@ -21,6 +21,7 @@ def give_non_zero(mat):
     return co
 
 def detect_sq(image):
+	#======================detect corners of squares=============
     g_kernel = cv2.getGaborKernel((8,8), 4.0, 0, 5, 0, 0)
     g_ = cv2.getGaborKernel((8,8), 4.0,np.pi/2 , 5, 0, 0)
     mj = cv2.filter2D(image,0, g_kernel)  * cv2.filter2D(image,0, g_)
@@ -74,17 +75,18 @@ def detect(image):
     im = trans(image)
     im = im.astype('uint8')
     img = cv2.resize(im,(72,72))
-    sq_corner = detect_sq(img) 
-    tri_corner = detect_tri(img)
+
+    sq_corner = detect_sq(img)    # detecting if it contains corner correspondes to square 
+    tri_corner = detect_tri(img)  # detecting if it contains corner correspondes to square
     flag = 0
-    if len(sq_corner)>0:
+    if len(sq_corner)>0:          # if it is square then sq_corner function must hae detected corners
         flag = 0
         #print('its a square')
         return flag,sq_corner
-    elif len(tri_corner)>0:
+    elif len(tri_corner)>0:        # same goes here
         flag = 1
         #print('its a triagle')
         return flag,tri_corner
-    else:
+    else:                          # if nothing is detected then it is empty or background
         print('empty')
         return flag,[]
