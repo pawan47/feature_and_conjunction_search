@@ -1,13 +1,13 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+
 import cv2
 import numpy as np
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mping
 
-blue_tri = cv2.imread('images/ho_blue_tri.png')[:,:,::-1]
-blue_sq = cv2.imread('images/blue_sq.png')[:,:,::-1]
-red_sq = cv2.imread('images/red_sq.png')[:,:,::-1]
-red_tri = cv2.imread('images/ho_red_tri.png')[:,:,::-1]
 
 def trans(a):
     return .299*a[:,:,0] + .402*a[:,:,1] + .299*a[:,:,2]
@@ -78,12 +78,12 @@ def detect(image):
     tri_corner = detect_tri(img)
     flag = 0
     if len(sq_corner)>0:
-        flag = 1
-        print('its a square')
+        flag = 0
+        #print('its a square')
         return flag,sq_corner
     elif len(tri_corner)>0:
-        flag = 2
-        print('its a triagle')
+        flag = 1
+        #print('its a triagle')
         return flag,tri_corner
     else:
         print('empty')

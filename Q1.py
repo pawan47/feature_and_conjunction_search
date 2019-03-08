@@ -3,6 +3,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mping
+import random 
 
 blue_tri = cv2.imread('blue_tri.png')[:,:,::-1]
 blue_sqr = cv2.imread('blue_sqr.png')[:,:,::-1]
@@ -19,6 +20,14 @@ def give_non_zero(mat):
             if mat[i,j] > 0:
                 co.append([i,j])
     return co
+
+def isListEmpty(inList):
+    ll = np.array(inList)
+    if len(ll[0]) ==0:
+        return False
+    else:
+        return True
+    
 
 def detect_sq(image):
     g_kernel = cv2.getGaborKernel((8,8), 4.0, 0, 5, 0, 0)
@@ -81,7 +90,7 @@ def detect(image):
         flag = 1
         print('its a square')
         return flag,sq_corner
-    elif len(tri_corner)>0:
+    elif isListEmpty(tri_corner):
         flag = 2
         print('its a triagle')
         return flag,tri_corner
@@ -89,19 +98,25 @@ def detect(image):
         print('empty')
         return flag,[]
 
-ml = red_sqr
+back = np.array([[[255]*3]*72]*72)
 
+chec = [blue_sqr,blue_tri,red_sqr,red_tri,back]
+random.shuffle(chec)
+for i in range(5):
 
+    ml = chec[i]
 
-plt.imshow(ml, cmap="gray")
+    plt.imshow(ml)
 
-flag,corners = detect(ml)
+    flag,corners = detect(ml)
 
-if flag == 1:
-    plt.title("Detected Square using gabor filter")
+    if flag == 1:
+        plt.title("Detected Square using gabor filter")
 
-if flag == 2:
-    plt.title("Detected triangle using gabor filter")
-plt.show()
+    if flag == 2:
+        plt.title("Detected triangle using gabor filter")
+    if flag == 0:
+        plt.title("Nothing is Detected --background ")
+    plt.show()
 
 
