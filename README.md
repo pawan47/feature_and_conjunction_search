@@ -28,11 +28,13 @@ This asks for input parameters,
 the first line is for choosing between feature search or conjunction search, put 0 for feature search and 1 for conjunction search and 2 to exit.
 the second line asks for number of objects, enter a number less than or equal to 100.
 
-For example, when you run:
->enter 0 for Feature Search, 1 for Conjunction Search and 2 to exit
+For example, when you run: python q2.py
+```
+enter 0 for Feature Search, 1 for Conjunction Search and 2 to exit
 0
 enter the number of points. This number should not be more than 100
 9
+```
 
 #### Output
 You get the details of the color and shape for each frame along with frame's bounding box .
