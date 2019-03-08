@@ -42,19 +42,20 @@ def shape_map_f(M, req_points):
         flag, corners = detect(M[i[0]:i[0]+72, i[1]:i[1]+72,:])
         
         if flag == 0:
-            print('detected square at point', i)
+            print('detected square at frame', i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
             x_.append([i[1]+36, i[0] + 36])
             # plt.scatter(i[1]+36, i[0] + 36, c = 'r', label = 'square', marker = 's')
 
         elif flag == 1:
-            print('detected triangle at point', i)
+            print('detected triangle at frame', i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
             y_.append([i[1]+36, i[0] + 36])
             # plt.scatter(i[1]+36, i[0] + 36, c = 'b', label = 'triangle', marker = '^')
         else:
-            print('detected background at point',i)
+            print('detected background at frmae', i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
 
     plt.scatter(*zip(*x_), c = 'r', label = 'square', marker = 's')
     plt.scatter(*zip(*y_), c = 'b', label = 'triangle', marker = '^')
+    # plt.savefig('fig5.jpg')
 
 
 # In[10]:
@@ -66,9 +67,9 @@ def color_map_f(M, req_points):
         flag = detect_col(M[i[0]:i[0]+72, i[1]:i[1]+72,:])
 
         if flag == 0:
-            print('red color detected at point',i)
+            print('red color detected at frame',i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
         if flag == 1:
-            print('blue color detected at point',i)
+            print('blue color detected at frame',i, (i[0], i[1] + 72), (i[0] + 72, i[1]), (i[0] + 72, i[1] + 72))
 
 
 # In[11]:
@@ -120,7 +121,9 @@ def genFeature(random_nums, size=72,in_shape = True,in_col = False):
                 req_points.append((x,y))
             #make an thresholding function
 
-    
+    # plt.imshow(M)
+    # plt.savefig('fig4.jpg')
+
     return M, req_points,in_col
 
 
@@ -195,9 +198,10 @@ def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0
     
     x,y = points[sel_list.pop()]
     req_points.append((x,y))
-    
+    # r, s = x, y
     
     M[x:x+72, y:y+72] = make_shape(shape_odd,color_odd)
+    plt.scatter(y+36, x+36, c = 'r', label = 'square', marker = 's')
     #print(shape_odd,color_odd)
     
     random_nums -=1
@@ -235,7 +239,12 @@ def conjucmake(random_nums, size=72,shape_odd = 0,color_odd = 0):  # 0 == red  0
         M[x:x+72, y:y+72] = make_shape(1-shape_odd,color_odd)
         #print(1-shape_odd,color_odd)
         req_points.append((x,y))
-    
+
+    # plt.imshow(M)
+    # plt.savefig('fig6.jpg')    
+    # plt.scatter(s+36, r+36, c = 'r', label = 'square', marker = 's')
+    # plt.savefig('fig7.jpg')
+
     return M,req_points
     
 
@@ -256,7 +265,8 @@ def runconj(M,req_points_):
         else:
             k += ' triangle'
 
-        print(k,'is detected at',req_points_[i])
+        tu = req_points_[i]
+        print(k,'is detected at frame', tu, (tu[0], tu[1] + 72), (tu[0] + 72, tu[1]), (tu[0] + 72, tu[1] + 72))
         dete.append(k)
 
 

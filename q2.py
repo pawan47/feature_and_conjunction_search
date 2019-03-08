@@ -37,8 +37,8 @@ def q2_para(type_=0,rand_point = 90): #0 = feature
         
 while True:
 
-	choice = int(input('enter_')) # 0,1,2=exit
-	rand_point = int(input('enter_'))
+	choice = int(input('enter 0 for Feature Search, 1 for Conjunction Search and 2 to exit\n')) # 0,1,2=exit
+	rand_point = int(input('enter the number of points. This number should not be more than 100\n'))
 	if choice == 2:
 		break
 	q2_para(choice,rand_point)

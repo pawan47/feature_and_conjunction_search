@@ -57,8 +57,7 @@ for i in xx:
     con.append(p)
     print(i)
 
-print(fet,con)
-plt.plot(fet,xx)
-plt.plot(con,xx)
+plt.plot(xx, fet, 'r-', label = 'Feature Search')
+plt.plot(xx, con, 'b-', label = 'Conjunction Search')
+plt.legend()
 plt.show()
-
